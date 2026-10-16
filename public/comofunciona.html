@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoBasurin - Cómo Funciona</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header id="site-header"></header>
+
+    <main class="dark-section">
+        <div class="container">
+            <h1 class="section-title">Funcionamiento del Sistema</h1>
+            <p class="section-subtitle">Lógica de control automatizada mediante arquitectura embebida.</p>
+
+            <div class="grid-3-cols">
+                <div class="card-item">
+                    <div style="color: var(--accent-green); font-size: 24px; margin-bottom: 15px; font-weight: bold;">01</div>
+                    <h4 style="color: #fff; font-size: 18px; margin-bottom: 10px;">Detección e Ingreso</h4>
+                    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.5;">
+                        Al colocar un residuo en la boca de entrada, un sensor de proximidad ultrasónico o infrarrojo activa el ciclo de análisis del microcontrolador Arduino.
+                    </p>
+                </div>
+                <div class="card-item">
+                    <div style="color: var(--accent-green); font-size: 24px; margin-bottom: 15px; font-weight: bold;">02</div>
+                    <h4 style="color: #fff; font-size: 18px; margin-bottom: 10px;">Procesamiento y Selección</h4>
+                    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.5;">
+                        La placa procesa las señales de los sensores internos para determinar la categoría física del periférico (cables, placas, pilas o plástico externo).
+                    </p>
+                </div>
+                <div class="card-item">
+                    <div style="color: var(--accent-green); font-size: 24px; margin-bottom: 15px; font-weight: bold;">03</div>
+                    <h4 style="color: #fff; font-size: 18px; margin-bottom: 10px;">Clasificación Mecánica</h4>
+                    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.5;">
+                        Un servomotor de alto torque direcciona una compuerta interna pivotante, depositando el material de forma exacta en su compartimiento correspondiente.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-item" style="margin-top: 40px; display: flex; flex-wrap: wrap; gap: 30px; align-items: center;">
+                <div style="flex: 1; min-width: 280px;">
+                    <h3 style="color: #fff; margin-bottom: 15px; font-size: 22px;">Monitoreo de Capacidad en Tiempo Real</h3>
+                    <p style="color: var(--text-bright-gray); margin-bottom: 15px; font-size: 15px;">
+                        Cada compartimiento cuenta con un sensor de nivel ultrasónico que mide la distancia hasta el tope de los objetos acumulados.
+                    </p>
+                    <p style="color: var(--text-muted); font-size: 14px;">
+                        Cuando el volumen de llenado alcanza el 90%, el sistema bloquea temporalmente la compuerta de esa sección y enciende un indicador LED de alerta, previniendo atascos.
+                    </p>
+                </div>
+                <div style="flex: 1; min-width: 280px; background: rgba(0, 255, 127, 0.02); border: 1px dashed var(--border-color); padding: 25px; border-radius: 8px;">
+                    <h4 style="color: var(--accent-green); margin-bottom: 10px; font-size: 14px; text-transform: uppercase;">Especificaciones Técnicas</h4>
+                    <ul style="list-style: none; font-size: 13px; color: var(--text-muted); line-height: 2;">
+                        <li>• <strong style="color: #fff;">Controlador:</strong> Arduino Uno R3 / ATmega328P</li>
+                        <li>• <strong style="color: #fff;">Sensores de Distancia:</strong> HC-SR04 (Precisión ±3mm)</li>
+                        <li>• <strong style="color: #fff;">Actuadores:</strong> Servomotores TowerPro MG996R (Engranajes metálicos)</li>
+                        <li>• <strong style="color: #fff;">Alimentación:</strong> Fuente externa conmutada 12V 2A</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer" id="site-footer"></footer>
+
+    <script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/layout.js"></script></body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoBasurin - Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header id="site-header"></header>
+
+    <main class="dark-section" style="display: flex; justify-content: center; padding-top: 160px;">
+        <div class="container" style="display: flex; justify-content: center;">
+            <div class="checkout-form-box" style="width: 100%; max-width: 420px;">
+                <h2 style="color: #fff; text-align: center; margin-bottom: 10px;">Ingresar al Panel</h2>
+                <p style="color: var(--text-muted); text-align: center; font-size: 14px; margin-bottom: 30px;">Accedé al control de tu dispositivo</p>
+                
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" id="loginEmail" required placeholder="ejemplo@correo.com">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 25px;">
+                        <label>Contraseña</label>
+                        <input type="password" id="loginPassword" required placeholder="••••••••">
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%; margin-bottom: 20px;">Iniciar Sesión</button>
+                    
+                    <div class="login-actions-links">
+                        <a href="recuperar.html" class="login-link-secondary">¿Olvidaste tu contraseña?</a>
+                        <p class="login-register-text">
+                            ¿No tenés una cuenta? <a href="registro.html" class="login-link-accent">Crear cuenta</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer" id="site-footer"></footer>
+
+    <script>
+       document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  try {
+    const r = await api('/login', { method: 'POST', body: {
+      email: document.getElementById("loginEmail").value,
+      password: document.getElementById("loginPassword").value
+    }});
+    sessionStorage.setItem('token', r.token);
+    sessionStorage.setItem('userLoggedIn', 'true');
+    sessionStorage.setItem('nombreUsuario', r.nombre);
+    sessionStorage.setItem('emailUsuario', r.email);
+    location.href = "index.html";
+  } catch (err) { alert(err.message); }
+});
+    </script>
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/layout.js"></script></body>
+</html>

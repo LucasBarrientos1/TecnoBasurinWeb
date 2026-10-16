@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoBasurin - Completar Reserva</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header id="site-header"></header>
+
+    <main class="dark-section">
+        <div class="container">
+            <h1 class="section-title">Formulario de Reserva Oficial</h1>
+            <p class="section-subtitle">Completá la información requerida para procesar el envío de tu módulo de software y hardware.</p>
+
+            <div class="checkout-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; margin-top: 30px; align-items: start;">
+                
+                <!-- Formulario de Datos -->
+                <form id="checkout-form" onsubmit="processReservation(event)" class="checkout-form-box" style="background-color: var(--card-bg-dark); padding: 35px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+                    
+                    <!-- Grupo 1: Datos Comprador -->
+                    <h3 style="color: var(--accent-green); margin-bottom: 20px; border-bottom: 1px solid rgba(0, 255, 127, 0.2); padding-bottom: 8px;">1. Datos del Solicitante</h3>
+                    <div class="input-row" style="display: flex; gap: 20px;">
+                        <div class="input-group" style="flex: 1;">
+                            <label>Nombre Completo</label>
+                            <input type="text" required placeholder="Juan Pérez">
+                        </div>
+                        <div class="input-group" style="flex: 1;">
+                            <label>DNI / CUIT</label>
+                            <input type="text" required placeholder="20-XXXXXXXX-9">
+                        </div>
+                    </div>
+                    <div class="input-row" style="display: flex; gap: 20px;">
+                        <div class="input-group" style="flex: 1;">
+                            <label>Teléfono de Contacto</label>
+                            <input type="tel" required placeholder="381 XXXXXXX">
+                        </div>
+                        <div class="input-group" style="flex: 1;">
+                            <label>Correo Electrónico</label>
+                            <input type="email" required placeholder="ejemplo@coviello.com">
+                        </div>
+                    </div>
+
+                    <!-- Grupo 2: Envío Incluido -->
+                    <h3 style="color: var(--accent-green); margin-top: 30px; margin-bottom: 20px; border-bottom: 1px solid rgba(0, 255, 127, 0.2); padding-bottom: 8px;">2. Detalles de Entrega (Envío Bonificado)</h3>
+                    <div class="input-row" style="display: flex; gap: 20px;">
+                        <div class="input-group" style="flex: 1;">
+                            <label>Calle y Número</label>
+                            <input type="text" required placeholder="Av. Avellaneda 500">
+                        </div>
+                        <div class="input-group" style="flex: 0.5;">
+                            <label>Piso/Depto</label>
+                            <input type="text" placeholder="2B">
+                        </div>
+                    </div>
+                    <div class="input-row" style="display: flex; gap: 20px;">
+                        <div class="input-group" style="flex: 1;">
+                            <label>Provincia</label>
+                            <input type="text" required value="Tucumán">
+                        </div>
+                        <div class="input-group" style="flex: 1;">
+                            <label>Código Postal</label>
+                            <input type="text" required placeholder="4000">
+                        </div>
+                    </div>
+
+                    <!-- Grupo 3: Datos de Pago -->
+                    <h3 style="color: var(--accent-green); margin-top: 30px; margin-bottom: 20px; border-bottom: 1px solid rgba(0, 255, 127, 0.2); padding-bottom: 8px;">3. Pago (modo demostración)</h3><p style="color: var(--text-muted); font-size: 13px; margin-bottom: 15px;">Este pago es simulado: los datos de la tarjeta no se guardan ni se envían.</p>
+                    <div class="input-group">
+                        <label>Nombre impreso en la tarjeta</label>
+                        <input type="text" required placeholder="JUAN PEREZ">
+                    </div>
+                    <div class="input-group">
+                        <label>Número de la Tarjeta</label>
+                        <input type="text" required placeholder="4517 •••• •••• 9821" maxlength="19">
+                    </div>
+                    <div class="input-row" style="display: flex; gap: 20px;">
+                        <div class="input-group" style="flex: 1;">
+                            <label>Vencimiento</label>
+                            <input type="text" required placeholder="MM/AA" maxlength="5">
+                        </div>
+                        <div class="input-group" style="flex: 1;">
+                            <label>Código de Seguridad (CVC)</label>
+                            <input type="password" required placeholder="•••" maxlength="4">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn" style="width: 100%; margin-top: 30px; font-size: 18px; padding: 15px; border-radius: 10px;">Confirmar reserva</button>
+                </form>
+
+                <div class="checkout-summary-box" id="checkout-summary" style="background-color: var(--card-bg-dark); padding: 30px; border-radius: 20px; border: 1px solid rgba(0, 255, 127, 0.15); position: sticky; top: 100px;"></div>
+</div>
+</div>
+</main>
+
+    <footer class="main-footer" id="site-footer"></footer>
+
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/checkout.js"></script>
+<script src="js/panel.js"></script>
+</body>
+</html>

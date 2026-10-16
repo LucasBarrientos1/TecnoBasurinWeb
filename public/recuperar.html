@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoBasurin - Recuperar Contraseña</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- NAV BAR INSTTUCIONAL -->
+    <header id="site-header"></header>
+
+    <!-- CAJA DE RECUPERACIÓN CENTRADA -->
+    <main class="dark-section" style="display: flex; justify-content: center; padding-top: 160px; padding-bottom: 80px;">
+        <div class="container" style="display: flex; justify-content: center;">
+            <div class="checkout-form-box" style="width: 100%; max-width: 420px; min-height: 320px; display: flex; flex-direction: column; justify-content: center;">
+                
+                <!-- ESTADO 1: FORMULARIO INICIAL -->
+                <div id="form-recovery-block">
+                    <h2 style="color: #fff; text-align: center; margin-bottom: 10px;">Recuperar Contraseña</h2>
+                    <p style="color: var(--text-muted); text-align: center; font-size: 14px; margin-bottom: 30px;">
+                        Ingresá tu correo electrónico y te enviaremos las instrucciones para restablecer tu cuenta.
+                    </p>
+                    
+                    <form onsubmit="ejecutarRecuperacion(event)">
+                        <div class="input-group" style="margin-bottom: 25px;">
+                            <label>Correo Electrónico</label>
+                            <input type="email" id="recovery-email" required placeholder="tu-usuario@correo.com">
+                        </div>
+                        
+                        <button type="submit" class="btn" style="width: 100%; margin-bottom: 20px;">Enviar instrucciones</button>
+                    </form>
+                </div>
+
+                <!-- ESTADO 2: MENSAJE DE ENVIADO (OCULTO POR DEFECTO) -->
+                <div id="success-recovery-block" style="display: none; text-align: center;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">📩</div>
+                    <h2 style="color: var(--accent-green); margin-bottom: 10px;">¡Correo Enviado!</h2>
+                    <p style="color: var(--text-bright-gray); font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                        Las instrucciones de recuperación fueron enviadas con éxito a <br>
+                        <strong id="display-target-email" style="color: #fff;"></strong>.
+                    </p>
+                    <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 25px;">
+                        ¿No te llegó el mensaje? Revisá la carpeta de Spam o solicitá un nuevo intento.
+                    </p>
+                    
+                    <!-- Opción de Reenvío con interacción -->
+                    <button type="button" class="btn" onclick="reenviarCorreo()" style="width: 100%; background-color: #0b1318; border: 1px solid var(--accent-green); color: var(--accent-green); margin-bottom: 20px;">
+                        Reenviar correo de instrucciones
+                    </button>
+                </div>
+
+                <!-- ENLACE COMÚN DE RETORNO -->
+                <div class="login-actions-links" style="text-align: center; margin-top: 10px;">
+                    <a href="login.html" class="login-link-secondary">Volver al Iniciar Sesión</a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- CARRITO LATERAL (OBLIGATORIO PARA QUE NO TIRE ERROR EL JS) -->
+    <footer class="main-footer" id="site-footer"></footer>
+
+    <script>
+        // Al presionar enviar por primera vez
+        function ejecutarRecuperacion(e) {
+            e.preventDefault();
+            
+            const emailInput = document.getElementById('recovery-email').value;
+            document.getElementById('display-target-email').innerText = emailInput;
+
+            // Transición de bloques simulando el procesamiento
+            document.getElementById('form-recovery-block').style.display = 'none';
+            document.getElementById('success-recovery-block').style.display = 'block';
+        }
+
+        // Lógica interactiva si presionan el botón de reenviar
+        function reenviarCorreo() {
+            alert("🔄 Procesando reenvío... Se ha enviado un nuevo enlace de recuperación a tu casilla.");
+        }
+    </script>
+    
+    <script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/layout.js"></script></body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoBasurin - Mi Panel</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header id="site-header"></header>
+<main class="dark-section">
+    <div class="container">
+        <div class="panel-top">
+            <div>
+                <h1 class="section-title" id="panel-title">Mi Panel</h1>
+                <p class="section-subtitle">Estado de tu contenedor en tiempo real</p>
+            </div>
+            <span class="panel-chip" id="panel-status">Dispositivo en línea</span>
+        </div>
+
+        <div class="panel-stats" id="panel-stats"></div>
+
+        <h2 class="panel-h2">Compartimientos</h2>
+        <div class="panel-grid" id="panel-compartments"></div>
+
+        <div class="panel-cols">
+            <section>
+                <h2 class="panel-h2">Alertas</h2>
+                <div id="panel-alerts"></div>
+            </section>
+            <section>
+                <h2 class="panel-h2">Últimos residuos clasificados</h2>
+                <div class="panel-table-wrap"><table class="panel-table">
+                    <thead><tr><th>Hora</th><th>Residuo</th><th>Peso</th><th>Destino</th></tr></thead>
+                    <tbody id="panel-log"></tbody>
+                </table></div>
+            </section>
+        </div>
+
+        <div class="panel-sim">
+            <p>Modo demostración: los datos son simulados hasta conectar el Arduino.</p>
+            <button class="btn" id="btn-sim">Simular residuo</button>
+            <label><input type="checkbox" id="chk-auto"> Simulación automática</label>
+            <button class="btn panel-btn-ghost" id="btn-reset">Reiniciar datos</button>
+        </div>
+    </div>
+</main>
+<footer class="main-footer" id="site-footer"></footer>
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/checkout.js"></script>
+<script src="js/panel.js"></script>
+</body>
+</html>
