@@ -3,68 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TecnoBasurin - Cómo Funciona</title>
+    <title>Cómo Funciona - TecnoBasurin</title>
+    <!-- Hoja de estilos global -->
     <link rel="stylesheet" href="css/styles.css">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
+    <!-- Header dinámico inyectado por layout.js -->
     <header id="site-header"></header>
 
-    <main class="dark-section">
-        <div class="container">
-            <h1 class="section-title">Funcionamiento del Sistema</h1>
-            <p class="section-subtitle">Lógica de control automatizada mediante arquitectura embebida.</p>
+    <main class="main-container">
+        <!-- Encabezado de la Sección -->
+        <section class="container text-center" style="padding-top: 2rem; padding-bottom: 2rem;">
+            <h1 class="section-title">Funcionamiento del Prototipo</h1>
+            <p class="section-subtitle">Conoce el ciclo operativo automatizado y la tecnología de hardware que hace posible TecnoBasurin.</p>
+        </section>
 
-            <div class="grid-3-cols">
-                <div class="card-item">
-                    <div style="color: var(--accent-green); font-size: 24px; margin-bottom: 15px; font-weight: bold;">01</div>
-                    <h4 style="color: #fff; font-size: 18px; margin-bottom: 10px;">Detección e Ingreso</h4>
-                    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.5;">
-                        Al colocar un residuo en la boca de entrada, un sensor de proximidad ultrasónico o infrarrojo activa el ciclo de análisis del microcontrolador Arduino.
-                    </p>
-                </div>
-                <div class="card-item">
-                    <div style="color: var(--accent-green); font-size: 24px; margin-bottom: 15px; font-weight: bold;">02</div>
-                    <h4 style="color: #fff; font-size: 18px; margin-bottom: 10px;">Procesamiento y Selección</h4>
-                    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.5;">
-                        La placa procesa las señales de los sensores internos para determinar la categoría física del periférico (cables, placas, pilas o plástico externo).
-                    </p>
-                </div>
-                <div class="card-item">
-                    <div style="color: var(--accent-green); font-size: 24px; margin-bottom: 15px; font-weight: bold;">03</div>
-                    <h4 style="color: #fff; font-size: 18px; margin-bottom: 10px;">Clasificación Mecánica</h4>
-                    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.5;">
-                        Un servomotor de alto torque direcciona una compuerta interna pivotante, depositando el material de forma exacta en su compartimiento correspondiente.
-                    </p>
-                </div>
+        <!-- Imagen del Prototipo (Forma 2 Aplicada) -->
+        <section class="container" style="margin-bottom: 3rem;">
+            <div class="card-dark" style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <h3 style="color: var(--text-bright); margin-bottom: 10px;">
+                    <i class="fa-solid fa-microchip text-accent"></i> Núcleo de Procesamiento
+                </h3>
+                <img src="Imagen/arduino.png" alt="Prototipo Arduino TecnoBasurin" class="img-fluid-custom">
+                <p style="color: var(--text-muted); font-size: 14px; margin-top: 10px;">
+                    Vista del microcontrolador y las conexiones principales del sistema automatizado.
+                </p>
             </div>
+        </section>
 
-            <div class="card-item" style="margin-top: 40px; display: flex; flex-wrap: wrap; gap: 30px; align-items: center;">
-                <div style="flex: 1; min-width: 280px;">
-                    <h3 style="color: #fff; margin-bottom: 15px; font-size: 22px;">Monitoreo de Capacidad en Tiempo Real</h3>
-                    <p style="color: var(--text-bright-gray); margin-bottom: 15px; font-size: 15px;">
-                        Cada compartimiento cuenta con un sensor de nivel ultrasónico que mide la distancia hasta el tope de los objetos acumulados.
-                    </p>
-                    <p style="color: var(--text-muted); font-size: 14px;">
-                        Cuando el volumen de llenado alcanza el 90%, el sistema bloquea temporalmente la compuerta de esa sección y enciende un indicador LED de alerta, previniendo atascos.
-                    </p>
+        <!-- Ciclo Operativo (Etapas) -->
+        <section class="container" style="margin-bottom: 4rem;">
+            <h2 style="color: var(--text-bright); font-size: 24px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-gears text-accent"></i> Funcionamiento Operativo del Prototipo
+            </h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">El funcionamiento del contenedor automatizado se estructura en un ciclo de cuatro etapas principales:</p>
+            
+            <div class="grid-3-cols" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                
+                <div class="card-dark">
+                    <div class="card-icon"><i class="fa-solid fa-hand-holding text-accent"></i></div>
+                    <h3>1. Detección inicial</h3>
+                    <p>El usuario deposita un residuo electrónico en la bandeja de entrada. La presencia física del objeto es detectada de forma óptica por los sensores infrarrojos tipo detector de obstáculos.</p>
                 </div>
-                <div style="flex: 1; min-width: 280px; background: rgba(0, 255, 127, 0.02); border: 1px dashed var(--border-color); padding: 25px; border-radius: 8px;">
-                    <h4 style="color: var(--accent-green); margin-bottom: 10px; font-size: 14px; text-transform: uppercase;">Especificaciones Técnicas</h4>
-                    <ul style="list-style: none; font-size: 13px; color: var(--text-muted); line-height: 2;">
-                        <li>• <strong style="color: #fff;">Controlador:</strong> Arduino Uno R3 / ATmega328P</li>
-                        <li>• <strong style="color: #fff;">Sensores de Distancia:</strong> HC-SR04 (Precisión ±3mm)</li>
-                        <li>• <strong style="color: #fff;">Actuadores:</strong> Servomotores TowerPro MG996R (Engranajes metálicos)</li>
-                        <li>• <strong style="color: #fff;">Alimentación:</strong> Fuente externa conmutada 12V 2A</li>
-                    </ul>
+
+                <div class="card-dark">
+                    <div class="card-icon"><i class="fa-solid fa-microchip text-accent"></i></div>
+                    <h3>2. Análisis y sensado</h3>
+                    <p>El sistema evalúa las características físicas del objeto introducido. Para ello, la celda de carga de 5 kg combinada con el módulo HX711 miden el peso del elemento, mientras que el sensor inductivo de metal con salida NPN identifica si se trata de un componente metálico o conductor.</p>
                 </div>
+
+                <div class="card-dark">
+                    <div class="card-icon"><i class="fa-solid fa-rotate text-accent"></i></div>
+                    <h3>3. Clasificación y actuación mecánica</h3>
+                    <p>El microcontrolador Arduino UNO R3 procesa la información recopilada por los sensores y acciona de forma automática los servomotores MG996R y el motorreductor DC de 12 V (gestionado mediante el driver BTS7960) para abrir la compuerta correspondiente al compartimento de destino en menos de 3 segundos. Simultáneamente, el sensor ultrasónico HC-SR04 monitorea de manera constante el nivel de llenado interno para evitar desbordes.</p>
+                </div>
+
+                <div class="card-dark" style="grid-column: 1 / -1;">
+                    <div class="card-icon"><i class="fa-solid fa-display text-accent"></i></div>
+                    <h3>4. Retroalimentación y monitoreo</h3>
+                    <p>La pantalla LCD y los LEDs indicadores muestran mensajes de estado en tiempo real al usuario ("Procesando", "Deposite aquí", o alertas de capacidad llena). Asimismo, los datos estadísticos de uso se registran de manera interna para su visualización en la plataforma web educativa.</p>
+                </div>
+
             </div>
-        </div>
+        </section>
+
+        <!-- Definición y Descripción de Componentes -->
+        <section class="container" style="margin-bottom: 5rem;">
+            <h2 style="color: var(--text-bright); font-size: 24px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-box-archive text-accent"></i> Definición y Descripción de Componentes del Sistema
+            </h2>
+            
+            <div class="card-dark" style="padding: 35px;">
+                <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 20px;">
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Arduino UNO R3:</strong> Microcontrolador programable que actúa como el cerebro del sistema, encargado de procesar las señales de los sensores y enviar las órdenes de control a los motores y pantallas.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Celda de carga (5 kg, tipo barra):</strong> Transductor que mide peso o fuerza aplicando el principio de deformación por resistencia eléctrica, convirtiendo la carga mecánica del residuo en una señal eléctrica.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Módulo HX711:</strong> Conversor analógico-digital (ADC) de alta precisión diseñado específicamente para celdas de carga; amplifica la débil señal analógica de la celda y la digitaliza para que el microcontrolador la lea.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Servo para bandeja MG996R:</strong> Actuador electromecánico con engranajes metálicos encargado de mover o inclinar la bandeja inicial de recepción de forma precisa.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Servos clasificadores (2 unidades MG996R):</strong> Actuadores de alta resistencia y torque que permiten abrir y posicionar con exactitud las compuertas de los compartimentos internos.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Motorreductor DC (12 V):</strong> Motor de corriente continua acoplado a una caja de reducción mecánica que disminuye la velocidad (60–100 RPM) para incrementar la fuerza de arrastre en los mecanismos del tacho.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Driver para motor BTS7960:</strong> Circuito integrado de alta potencia (puente H) que permite controlar de forma segura la velocidad y el sentido de giro del motor DC mediante modulación de pulsos.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Sensor ultrasónico HC-SR04:</strong> Dispositivo que mide distancia mediante el envío de ondas sonoras de alta frecuencia, utilizado para calcular el nivel de llenado de los depósitos internos.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Sensor de presencia (2 Infrarrojos tipo detector de obstáculos):</strong> Sensores ópticos que detectan la interrupción o reflexión de un haz de luz para confirmar la llegada o el paso de un residuo en la entrada.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Sensor de metal inductivo (NPN):</strong> Dispositivo que detecta objetos metálicos sin contacto físico generando un campo electromagnético, clave para diferenciar componentes electrónicos metálicos con una adaptación eléctrica segura.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Fuente para motor (12 V):</strong> Suministro eléctrico dedicado a entregar la tensión y corriente necesarias para el funcionamiento del motorreductor y etapas de potencia.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Fuente regulada para servos (5–6 V, 5A+):</strong> Fuente de alta corriente diseñada exclusivamente para alimentar los servomotores, evitando caídas de tensión que puedan reiniciar o colgar al microcontrolador.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Protoboard (400 u 830 puntos):</strong> Placa de pruebas con perforaciones interconectadas que permite armar circuitos eléctricos y electrónicos de manera provisional sin necesidad de soldar.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Cables Dupont (Macho-macho / Macho-hembra):</strong> Cables flexibles con terminales de pin diseñados para realizar conexiones rápidas y seguras entre los módulos y la placa de desarrollo.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Cables eléctricos:</strong> Conductores de mayor sección aptos para soportar el flujo de corriente elevado requerido en la alimentación general, la fuente y los motores.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Resistencias y LEDs:</strong> Componentes auxiliares utilizados para limitar corrientes, proteger entradas/salidas y proveer indicadores lumínicos de estado en el circuito.</div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-circle-check text-accent" style="margin-top: 4px;"></i>
+                        <div><strong style="color: var(--text-bright);">Interruptor general:</strong> Elemento de corte manual ubicado en la entrada de alimentación para encender o apagar de forma segura todo el sistema eléctrico del prototipo.</div>
+                    </li>
+                </ul>
+            </div>
+        </section>
     </main>
 
-    <footer class="main-footer" id="site-footer"></footer>
+    <!-- Footer dinámico inyectado por layout.js -->
+    <footer id="site-footer"></footer>
 
+    <!-- Scripts de la aplicación -->
     <script src="js/api.js"></script>
-<script src="js/cart.js"></script>
-<script src="js/layout.js"></script></body>
+    <script src="js/cart.js"></script>
+    <script src="js/layout.js"></script>
+</body>
 </html>

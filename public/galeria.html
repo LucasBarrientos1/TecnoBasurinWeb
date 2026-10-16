@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería del Prototipo - TecnoBasurin</title>
+    <!-- Hoja de estilos global -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header dinámico inyectado por layout.js -->
+    <header id="site-header"></header>
+
+    <main class="main-container">
+        <!-- Encabezado de la Sección -->
+        <section class="container text-center" style="padding-top: 2rem; padding-bottom: 2rem;">
+            <h1 class="section-title">Galería del Prototipo Físico</h1>
+            <p class="section-subtitle">Explora el proceso de diseño, montaje electrónico y la estructura final de nuestro contenedor inteligente.</p>
+        </section>
+
+        <!-- Grilla de Imágenes de la Galería -->
+        <section class="container" style="margin-bottom: 5rem;">
+            <div class="grid-3-cols" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+                
+                <!-- Tarjeta 1 -->
+                <div class="card-dark" style="text-align: center;">
+                    <img src="Imagen/arduino.png" alt="Montaje Electrónico" class="img-fluid-custom" style="margin-bottom: 20px;">
+                    <h3 style="color: var(--text-bright); margin-bottom: 10px;">
+                        <i class="fa-solid fa-microchip text-accent"></i> Circuito y Control
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 14px;">
+                        Pruebas iniciales de cableado, integración del Arduino UNO R3 y módulos de sensores en protoboard.
+                    </p>
+                </div>
+
+                <!-- Tarjeta 2 -->
+                <div class="card-dark" style="text-align: center;">
+                    <!-- Puedes reemplazar esta ruta por otra foto de tu proyecto, ej: estructura.png -->
+                    <img src="Imagen/arduino.png" alt="Estructura Mecánica" class="img-fluid-custom" style="margin-bottom: 20px;">
+                    <h3 style="color: var(--text-bright); margin-bottom: 10px;">
+                        <i class="fa-solid fa-box-archive text-accent"></i> Estructura y Compuertas
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 14px;">
+                        Ensamblaje de los servomotores MG996R y el motorreductor DC para la clasificación automática de residuos.
+                    </p>
+                </div>
+
+                <!-- Tarjeta 3 -->
+                <div class="card-dark" style="text-align: center;">
+                    <!-- Puedes reemplazar esta ruta por otra foto de tu proyecto, ej: equipo.png -->
+                    <img src="Imagen/arduino.png" alt="Equipo de Trabajo" class="img-fluid-custom" style="margin-bottom: 20px;">
+                    <h3 style="color: var(--text-bright); margin-bottom: 10px;">
+                        <i class="fa-solid fa-users text-accent"></i> Equipo de Desarrollo
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 14px;">
+                        Estudiantes del IES Alfredo Coviello trabajando en la integración del hardware con la plataforma web educativa.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer dinámico inyectado por layout.js -->
+    <footer id="site-footer"></footer>
+
+    <!-- Scripts de la aplicación -->
+    <script src="js/api.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/layout.js"></script>
+</body>
+</html>

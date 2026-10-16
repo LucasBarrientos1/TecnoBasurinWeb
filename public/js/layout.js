@@ -1,10 +1,13 @@
-// Header, footer y carrito compartidos. Se inyectan en todas las páginas.
 (function () {
     const logueado = sessionStorage.getItem('userLoggedIn') === 'true';
     const pagina = location.pathname.split('/').pop() || 'index.html';
     const links = [
-        ['index.html', 'Inicio'], ['producto.html', 'Producto'], ['comofunciona.html', 'Cómo Funciona'],
-        ['nosotros.html', 'Sobre Nosotros'], ['contacto.html', 'Contactos']
+        ['index.html', 'Inicio'], 
+        ['producto.html', 'Producto'], 
+        ['comofunciona.html', 'Cómo Funciona'],
+        ['galeria.html', 'Galería'],
+        ['nosotros.html', 'Sobre Nosotros'], 
+        ['contacto.html', 'Contactos']
     ];
     if (logueado) links.push(['panel.html', 'Mi Panel']);
     const nav = links.map(([h, t]) => `<li><a href="${h}"${h === pagina ? ' class="active"' : ''}>${t}</a></li>`).join('');
@@ -27,7 +30,7 @@
         if (logueado) {
             const saludo = document.createElement('span');
             saludo.className = 'user-welcome';
-            saludo.textContent = 'Hola, ' + (sessionStorage.getItem('nombreUsuario') || 'usuario'); // textContent: evita inyección de HTML
+            saludo.textContent = 'Hola, ' + (sessionStorage.getItem('nombreUsuario') || 'usuario');
             const salir = document.createElement('button');
             salir.className = 'btn btn-nav-login';
             salir.style.marginLeft = '10px';
@@ -51,9 +54,21 @@
                 <li><strong>Correo:</strong> contacto@tecnobasurin.com</li>
                 <li><strong>Teléfono:</strong> +54 381 529-4612</li>
                 <li><strong>Dirección:</strong> Virgen de la Merced 232, San Miguel de Tucumán</li></ul></div>
-            <div class="footer-col"><h4>Seguinos</h4><div class="footer-socials">
-                <a href="#" class="social-link">Instagram</a><a href="#" class="social-link">LinkedIn</a><a href="#" class="social-link">GitHub</a></div></div>
+            
+            <!-- Columna Legal e integrada en todas las vistas -->
+            <div class="footer-col">
+                <h4>Legales y Políticas</h4>
+                <div class="footer-help-links">
+                    <a href="legal.html#terminos" class="social-link">Términos y Condiciones</a>
+                    <a href="legal.html#privacidad" class="social-link">Política de Privacidad</a>
+                    <a href="legal.html#bases" class="social-link">Bases y Condiciones</a>
+                    <a href="legal.html#reciclaje" class="social-link">Normativa Ambiental</a>
+                </div>
+            </div>
+
+            <!-- Columna Ayuda y Galería -->
             <div class="footer-col"><h4>Ayuda y Soporte</h4><div class="footer-help-links">
+                <a href="galeria.html" class="social-link">Galería del Prototipo</a>
                 <a href="index.html#faq-section" class="help-link-highlight">Preguntas frecuentes</a>
                 <a href="contacto.html" class="social-link">Soporte Técnico</a></div></div>
             <div class="footer-col"><h4>Desarrolladores</h4><ul class="footer-team-list">
@@ -76,5 +91,7 @@
         </div>
         <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>`);
 
-    initCart();
+    if (typeof initCart === 'function') {
+        initCart();
+    }
 })();
