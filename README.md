@@ -24,3 +24,4 @@ Cada compañero que quiera correr el sitio usa su propio `.env` (con la misma DA
 | Panel | panel_estado (por usuario) |
 
 El sitio ahora se abre desde `http://localhost:3000` (no con doble clic en el .html).
+
