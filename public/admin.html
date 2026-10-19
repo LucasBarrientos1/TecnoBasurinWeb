@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoBasurin - Administración</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header id="site-header"></header>
+<main class="dark-section">
+    <div class="container">
+        <div class="panel-top">
+            <div>
+                <h1 class="section-title">Administración</h1>
+                <p class="section-subtitle">Ventas y cuentas de usuarios</p>
+            </div>
+            <span class="panel-chip">Modo administrador</span>
+        </div>
+
+        <div class="admin-tabs">
+            <button class="admin-tab active" data-tab="ventas">Ventas</button>
+            <button class="admin-tab" data-tab="usuarios">Usuarios</button>
+        </div>
+
+        <section id="tab-ventas">
+            <div class="panel-stats" id="admin-resumen"></div>
+            <h2 class="panel-h2">Pedidos</h2>
+            <div class="panel-table-wrap"><table class="panel-table">
+                <thead><tr><th>Pedido</th><th>Fecha</th><th>Cliente</th><th>Productos</th><th>Total</th><th>Estado</th></tr></thead>
+                <tbody id="admin-pedidos"></tbody>
+            </table></div>
+        </section>
+
+        <section id="tab-usuarios" hidden>
+            <h2 class="panel-h2">Cuentas registradas</h2>
+            <p class="panel-empty" style="margin-bottom:12px;">Elegí el rol de cada persona. Los administradores ven este menú; los demás usuarios no.</p>
+            <div class="panel-table-wrap"><table class="panel-table">
+                <thead><tr><th>Nombre</th><th>Correo</th><th>Registro</th><th>Rol</th></tr></thead>
+                <tbody id="admin-usuarios"></tbody>
+            </table></div>
+        </section>
+    </div>
+</main>
+<footer class="main-footer" id="site-footer"></footer>
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

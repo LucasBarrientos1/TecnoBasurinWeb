@@ -1256,3 +1256,30 @@ html {
         height: 20px;
     }
 }
+/* ---------- Administración ---------- */
+.admin-tabs { display: flex; gap: 10px; margin: 25px 0 10px; }
+.admin-tab { background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.admin-tab.active { background: rgba(0,255,127,0.1); color: var(--accent-green); border-color: var(--accent-green); }
+.admin-select { background: var(--card-bg-dark); color: var(--text-bright); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 10px; font-size: 13px; }
+.admin-select:disabled { opacity: .5; cursor: not-allowed; }
+[hidden] { display: none !important; }
+.panel-table td small { color: var(--text-muted); }
+
+/* ---------- Header en una sola fila (aunque haya más links, ej. Administración) ---------- */
+header .container { max-width: 1400px; }
+nav ul li a, .user-welcome { white-space: nowrap; }
+.header-action-group { flex-shrink: 0; }
+.user-welcome { max-width: 170px; overflow: hidden; text-overflow: ellipsis; }
+
+@media screen and (min-width: 1181px) {
+    nav ul { gap: 22px; flex-wrap: nowrap; }
+}
+
+/* Pantallas medianas: el menú pasa a una segunda fila y el contenido baja para no quedar tapado */
+@media screen and (min-width: 769px) and (max-width: 1180px) {
+    .header-flex { gap: 8px; }
+    nav { order: 3; width: 100%; }
+    nav ul { gap: 22px; flex-wrap: nowrap; overflow-x: auto; justify-content: center; scrollbar-width: none; }
+    nav ul::-webkit-scrollbar { display: none; }
+    .main-container, .dark-section { padding-top: 150px; }
+}
