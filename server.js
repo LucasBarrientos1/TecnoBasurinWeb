@@ -168,4 +168,7 @@ app.put('/api/panel', auth(true), wrap(async (req, res) => {
 
 app.use('/api', (req, res) => res.status(404).json({ error: 'Ruta no encontrada.' }));
 
-app.listen(PORT, () => console.log(`TecnoBasurin en http://localhost:${PORT}`));
+if (require.main === module) {
+    app.listen(PORT, () => console.log(`TecnoBasurin en http://localhost:${PORT}`));
+}
+module.exports = app;
