@@ -10,7 +10,7 @@
         ['contacto.html', 'Contactos']
     ];
     if (logueado) links.push(['panel.html', 'Mi Panel']);
-    // Solo cosmético: la seguridad real está en el servidor (requireAdmin). Un usuario común no pasa de admin.html.
+    // Solo cosmético: la Seguridad real está en el servidor (requireAdmin). Un usuario común no pasa de admin.html.
     if (logueado && sessionStorage.getItem('rolUsuario') === 'admin') links.push(['admin.html', 'Administración']);
     const nav = links.map(([h, t]) => `<li><a href="${h}"${h === pagina ? ' class="active"' : ''}>${t}</a></li>`).join('');
 

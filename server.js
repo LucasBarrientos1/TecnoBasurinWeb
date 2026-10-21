@@ -41,6 +41,21 @@ function auth(required) {
     };
 }
 
+// Solo administradores. El rol se consulta en la base en CADA pedido (no se confía en el token ni en el navegador),
+// así que quitarle el rol a alguien tiene efecto inmediato.
+function requireAdmin(req, res, next) {
+    auth(true)(req, res, async () => {
+        try {
+            const { rows } = await pool.query('SELECT rol FROM usuarios WHERE id = $1', [req.user.id]);
+            if (!rows[0] || rows[0].rol !== 'admin') return res.status(403).json({ error: 'No tenés permiso para esta sección.' });
+            next();
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Error interno del servidor.' });
+        }
+    });
+}
+
 // ---------- registro / login ----------
 app.post('/api/registro', wrap(async (req, res) => {
     const nombre = str(req.body.nombre, 100);
@@ -61,13 +76,13 @@ app.post('/api/registro', wrap(async (req, res) => {
 app.post('/api/login', wrap(async (req, res) => {
     const email = str(req.body.email, 150).toLowerCase();
     const password = typeof req.body.password === 'string' ? req.body.password : '';
-    const { rows } = await pool.query('SELECT id, nombre, email, password_hash FROM usuarios WHERE email = $1', [email]);
+    const { rows } = await pool.query('SELECT id, nombre, email, rol, password_hash FROM usuarios WHERE email = $1', [email]);
     const u = rows[0];
     if (!u || !(await bcrypt.compare(password, u.password_hash))) {
         return res.status(401).json({ error: 'Email o contraseña incorrectos.' });
     }
     const token = jwt.sign({ id: u.id, nombre: u.nombre }, JWT_SECRET, { expiresIn: '8h' });
-    res.json({ token, nombre: u.nombre, email: u.email });
+    res.json({ token, nombre: u.nombre, email: u.email, rol: u.rol });
 }));
 
 // ---------- recuperar contraseña ----------
@@ -163,6 +178,54 @@ app.put('/api/panel', auth(true), wrap(async (req, res) => {
          ON CONFLICT (usuario_id) DO UPDATE SET estado = EXCLUDED.estado, actualizado = now()`,
         [req.user.id, JSON.stringify(estado)]
     );
+    res.json({ ok: true });
+}));
+
+// ---------- administración (solo rol admin) ----------
+const ESTADOS_PEDIDO = ['reservado', 'confirmado', 'enviado', 'entregado', 'cancelado'];
+
+// Devuelve el rol actual desde la base (el frontend lo usa para decidir si muestra el menú).
+app.get('/api/me', auth(true), wrap(async (req, res) => {
+    const { rows } = await pool.query('SELECT nombre, email, rol FROM usuarios WHERE id = $1', [req.user.id]);
+    if (!rows[0]) return res.status(401).json({ error: 'Tu sesión expiró. Volvé a iniciar sesión.' });
+    res.json(rows[0]);
+}));
+
+app.get('/api/admin/usuarios', requireAdmin, wrap(async (req, res) => {
+    const { rows } = await pool.query('SELECT id, nombre, email, rol, creado FROM usuarios ORDER BY creado DESC');
+    res.json({ usuarios: rows, yo: req.user.id });
+}));
+
+app.put('/api/admin/usuarios/:id/rol', requireAdmin, wrap(async (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    const rol = req.body.rol;
+    if (!Number.isInteger(id) || !['usuario', 'admin'].includes(rol)) return res.status(400).json({ error: 'Datos inválidos.' });
+    // Un admin no puede quitarse el rol a sí mismo: así siempre queda al menos uno.
+    if (id === req.user.id && rol !== 'admin') return res.status(400).json({ error: 'No podés quitarte el rol de administrador a vos mismo.' });
+    const r = await pool.query('UPDATE usuarios SET rol = $1 WHERE id = $2', [rol, id]);
+    if (!r.rowCount) return res.status(404).json({ error: 'Usuario no encontrado.' });
+    res.json({ ok: true });
+}));
+
+app.get('/api/admin/ventas', requireAdmin, wrap(async (req, res) => {
+    const resumen = await pool.query(
+        `SELECT COUNT(*) FILTER (WHERE estado <> 'cancelado')::int AS cantidad,
+                COALESCE(SUM(total) FILTER (WHERE estado <> 'cancelado'), 0) AS total
+         FROM pedidos`);
+    const { rows } = await pool.query(
+        `SELECT p.id, p.nombre, p.email, p.telefono, p.calle, p.provincia, p.cp, p.total, p.estado, p.creado,
+                COALESCE(json_agg(json_build_object('nombre', i.nombre, 'cantidad', i.cantidad, 'precio', i.precio))
+                         FILTER (WHERE i.id IS NOT NULL), '[]') AS items
+         FROM pedidos p LEFT JOIN pedido_items i ON i.pedido_id = p.id
+         GROUP BY p.id ORDER BY p.creado DESC LIMIT 200`);
+    res.json({ resumen: resumen.rows[0], pedidos: rows, estados: ESTADOS_PEDIDO });
+}));
+
+app.put('/api/admin/pedidos/:id/estado', requireAdmin, wrap(async (req, res) => {
+    const estado = req.body.estado;
+    if (!ESTADOS_PEDIDO.includes(estado)) return res.status(400).json({ error: 'Estado inválido.' });
+    const r = await pool.query('UPDATE pedidos SET estado = $1 WHERE id = $2', [estado, str(req.params.id, 30)]);
+    if (!r.rowCount) return res.status(404).json({ error: 'Pedido no encontrado.' });
     res.json({ ok: true });
 }));
 

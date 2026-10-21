@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     nombre        TEXT NOT NULL,
     email         TEXT NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,              -- nunca la contraseña en texto plano
+    rol           TEXT NOT NULL DEFAULT 'usuario' CHECK (rol IN ('usuario','admin')),
     creado        TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 

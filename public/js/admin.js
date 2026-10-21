@@ -66,7 +66,7 @@ document.querySelectorAll('.admin-tab').forEach(btn => btn.addEventListener('cli
     $('tab-usuarios').hidden = btn.dataset.tab !== 'usuarios';
 }));
 
-// Primero ventas: si el servidor dice 403, no es admin.
+
 cargarVentas().then(cargarUsuarios).catch(err => {
     if (/permiso/i.test(err.message)) sinPermiso(); else alert(err.message);
 });
