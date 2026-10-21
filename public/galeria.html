@@ -21,6 +21,17 @@
             <p class="section-subtitle">Explora el proceso de diseño, montaje electrónico y la estructura final de nuestro contenedor inteligente.</p>
         </section>
 
+        <!-- Fotos del prototipo terminado -->
+        <section class="container" style="margin-bottom: 3rem;">
+            <h2 style="text-align: center; color: var(--text-bright); margin-bottom: 25px;">
+                <i class="fa-solid fa-trash-can-arrow-up text-accent"></i> Prototipo TecnoBasurin
+            </h2>
+            <div class="proto-grid">
+                <img src="Imagen/tecnobasurinprototipo.jpg" alt="Prototipo del contenedor inteligente TecnoBasurin" loading="lazy">
+                <img src="Imagen/tecnobasurinprototipo1.jpg" alt="Prototipo TecnoBasurin, segunda vista" loading="lazy">
+            </div>
+        </section>
+
         <!-- Grilla de Imágenes de la Galería -->
         <section class="container" style="margin-bottom: 5rem;">
             <div class="grid-3-cols" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
@@ -50,8 +61,18 @@
 
                 <!-- Tarjeta 3 -->
                 <div class="card-dark" style="text-align: center;">
-                    <!-- Puedes reemplazar esta ruta por otra foto de tu proyecto, ej: equipo.png -->
-                    <img src="Imagen/arduino.png" alt="Equipo de Trabajo" class="img-fluid-custom" style="margin-bottom: 20px;">
+                    <!-- Carrusel estilo Instagram con las fotos del equipo (se mueve solo; también se desliza con el dedo) -->
+                    <div class="ig-carousel" aria-label="Fotos del equipo de desarrollo">
+                        <div class="ig-track">
+                            <img src="Imagen/equipo1.png" alt="Equipo de desarrollo TecnoBasurin, foto 1" loading="lazy">
+                            <img src="Imagen/equipo2.jpg" alt="Equipo de desarrollo TecnoBasurin, foto 2" loading="lazy">
+                            <img src="Imagen/equipo3.jpg" alt="Equipo de desarrollo TecnoBasurin, foto 3" loading="lazy">
+                            <img src="Imagen/equipo4.jpg" alt="Equipo de desarrollo TecnoBasurin, foto 4" loading="lazy">
+                        </div>
+                        <button class="ig-btn ig-prev" type="button" aria-label="Foto anterior"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="ig-btn ig-next" type="button" aria-label="Foto siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+                        <div class="ig-dots"></div>
+                    </div>
                     <h3 style="color: var(--text-bright); margin-bottom: 10px;">
                         <i class="fa-solid fa-users text-accent"></i> Equipo de Desarrollo
                     </h3>
@@ -71,5 +92,6 @@
     <script src="js/api.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/layout.js"></script>
+    <script src="js/galeria.js"></script>
 </body>
 </html>

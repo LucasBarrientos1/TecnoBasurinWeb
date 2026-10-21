@@ -53,6 +53,7 @@
     sessionStorage.setItem('userLoggedIn', 'true');
     sessionStorage.setItem('nombreUsuario', r.nombre);
     sessionStorage.setItem('emailUsuario', r.email);
+    sessionStorage.setItem('rolUsuario', r.rol || 'usuario');
     location.href = "index.html";
   } catch (err) { alert(err.message); }
 });

@@ -1283,3 +1283,20 @@ nav ul li a, .user-welcome { white-space: nowrap; }
     nav ul::-webkit-scrollbar { display: none; }
     .main-container, .dark-section { padding-top: 150px; }
 }
+
+/* ---------- Galería: carrusel estilo Instagram y fotos del prototipo ---------- */
+.ig-carousel { position: relative; border-radius: 14px; overflow: hidden; margin-bottom: 20px; border: 1px solid rgba(0, 255, 127, 0.18); background: #000; }
+.ig-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.ig-track::-webkit-scrollbar { display: none; }
+.ig-track img { flex: 0 0 100%; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 30%; scroll-snap-align: center; display: block; }
+.ig-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border-radius: 50%; border: none; background: rgba(0, 0, 0, 0.55); color: #fff; cursor: pointer; opacity: 0; transition: opacity 0.2s ease; }
+.ig-carousel:hover .ig-btn, .ig-btn:focus-visible { opacity: 1; }
+.ig-prev { left: 8px; }
+.ig-next { right: 8px; }
+.ig-dots { position: absolute; bottom: 10px; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; }
+.ig-dot { width: 7px; height: 7px; padding: 0; border: none; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: all 0.2s ease; }
+.ig-dot.active { background: var(--accent-green); transform: scale(1.3); }
+@media (hover: none) { .ig-btn { display: none; } }
+
+.proto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; align-items: start; }
+.proto-grid img { width: 100%; height: auto; border-radius: 12px; border: 1px solid rgba(0, 255, 127, 0.18); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); }
