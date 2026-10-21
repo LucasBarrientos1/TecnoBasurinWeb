@@ -72,3 +72,64 @@ $('btn-sim').addEventListener('click', simularResiduo);
 $('btn-reset').addEventListener('click', () => { estado = estadoInicial(); guardar(); render(); });
 $('chk-auto').addEventListener('change', e => { clearInterval(timer); timer = e.target.checked ? setInterval(simularResiduo, 3000) : null; });
 cargarEstado().then(e => { estado = e; render(); });
+
+
+// ---------- pestañas, foto de perfil (avatares predeterminados) y comunidad ----------
+const AVATARES = [['hoja', 'Hoja'], ['pila', 'Pila'], ['chip', 'Chip'], ['rayo', 'Rayo'], ['planeta', 'Planeta'], ['robot', 'Robot'], ['contenedor', 'Contenedor'], ['monitor', 'Monitor']];
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const avatarSrc = id => 'Imagen/avatares/' + (AVATARES.some(a => a[0] === id) ? id : 'hoja') + '.svg';
+let avatarActual = sessionStorage.getItem('avatarUsuario') || 'hoja';
+
+function pintarAvatar() {
+    document.querySelectorAll('.user-avatar, #avatar-actual').forEach(img => { img.src = avatarSrc(avatarActual); });
+    $('avatar-nombre').textContent = (AVATARES.find(a => a[0] === avatarActual) || AVATARES[0])[1];
+    $('avatar-grid').innerHTML = AVATARES.map(([id, n]) => `<button type="button" class="avatar-opt${id === avatarActual ? ' activo' : ''}" data-avatar="${id}" aria-pressed="${id === avatarActual}">
+        <img src="${avatarSrc(id)}" alt=""><span>${n}</span></button>`).join('');
+}
+
+$('avatar-grid').addEventListener('click', async e => {
+    const b = e.target.closest('[data-avatar]');
+    if (!b || b.dataset.avatar === avatarActual) return;
+    const anterior = avatarActual;
+    avatarActual = b.dataset.avatar;
+    sessionStorage.setItem('avatarUsuario', avatarActual);
+    pintarAvatar();
+    try {
+        await api('/perfil/avatar', { method: 'PUT', auth: true, body: { avatar: avatarActual } });
+    } catch (err) {
+        avatarActual = anterior;
+        sessionStorage.setItem('avatarUsuario', anterior);
+        pintarAvatar();
+        alert(err.message);
+    }
+});
+
+async function cargarComunidad() {
+    try {
+        const c = await api('/comunidad', { auth: true });
+        $('com-stats').innerHTML = [
+            [c.miembros, 'miembros'], [c.totales.residuos, 'residuos clasificados entre todos'], [c.totales.kg.toFixed(2) + ' kg', 'reciclados por la comunidad']
+        ].map(([v, l]) => `<div class="card-item"><strong class="panel-stat">${esc(v)}</strong><span>${l}</span></div>`).join('');
+        $('com-ranking').innerHTML = c.ranking.map(m => `<tr class="${m.soyYo ? 'rank-yo' : ''}">
+            <td>${m.posicion}</td>
+            <td><span class="com-miembro"><img class="com-avatar" src="${avatarSrc(m.avatar)}" alt=""> ${esc(m.nombre)}${m.soyYo ? ' <small>(vos)</small>' : ''}</span></td>
+            <td>${m.residuos}</td><td>${m.kg.toFixed(2)} kg</td></tr>`).join('')
+            || '<tr><td colspan="4" class="panel-empty">Todavía no hay miembros.</td></tr>';
+        $('com-posicion').textContent = c.miPosicion ? 'Estás en el puesto ' + c.miPosicion + ' de ' + c.miembros + '.' : '';
+        $('com-nuevos').innerHTML = c.nuevos.map(m => `<div class="com-nuevo${m.soyYo ? ' rank-yo' : ''}"><img class="com-avatar grande" src="${avatarSrc(m.avatar)}" alt=""><span>${esc(m.nombre)}</span></div>`).join('');
+    } catch (err) {
+        $('com-ranking').innerHTML = '<tr><td colspan="4" class="panel-empty">No se pudo cargar la comunidad.</td></tr>';
+    }
+}
+
+document.querySelectorAll('.panel-tab').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('.panel-tab').forEach(b => b.classList.toggle('active', b === btn));
+    ['contenedor', 'comunidad', 'perfil'].forEach(t => { $('tab-' + t).hidden = btn.dataset.tab !== t; });
+    if (btn.dataset.tab === 'comunidad') cargarComunidad();
+}));
+
+pintarAvatar();
+// Sincroniza con el servidor (por si la sesión se abrió antes de existir los avatares o se cambió desde otro dispositivo)
+api('/me', { auth: true }).then(m => {
+    if (m && m.avatar) { avatarActual = m.avatar; sessionStorage.setItem('avatarUsuario', m.avatar); pintarAvatar(); }
+}).catch(() => {});

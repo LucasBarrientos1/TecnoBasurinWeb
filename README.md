@@ -22,6 +22,7 @@ Cada compañero que quiera correr el sitio usa su propio `.env` (con la misma DA
 | Contacto | contactos |
 | Checkout | pedidos + pedido_items (precio calculado en el servidor) |
 | Panel | panel_estado (por usuario) |
+| Administración (solo admin) | usuarios.rol, pedidos.estado |
 
 El sitio ahora se abre desde `http://localhost:3000` (no con doble clic en el .html).
 
@@ -39,3 +40,13 @@ Supabase guarda la base de datos, pero **no ejecuta servidores Node/Express**. E
 
 En el plan gratis Render "duerme" el servicio tras 15 min sin visitas; la primera carga después tarda unos 30-50 segundos.
 
+
+## 5. Administradores
+1. Ejecutá `migracion-admin.sql` en Supabase (SQL Editor) una sola vez, cambiando el correo por el tuyo. Eso agrega la columna `rol` y te convierte en el primer admin.
+2. Cerrá sesión y volvé a entrar: aparece **Administración** en el menú (solo para admins).
+3. Desde ahí ves ventas (podés cambiar el estado de cada pedido) y cuentas (podés dar o quitar el rol de admin a otras personas).
+
+## 6. Foto de perfil y comunidad
+1. Ejecutá `migracion-comunidad.sql` en Supabase (una sola vez) ANTES de subir el servidor nuevo: agrega la columna `avatar` a `usuarios`.
+2. En **Mi Panel** hay tres pestañas: *Mi contenedor*, *Comunidad* (totales, ranking y nuevos miembros) y *Mi perfil* (elegir foto entre 8 avatares predeterminados).
+3. Los avatares son archivos fijos en `public/Imagen/avatares/` (nadie sube imágenes). Para agregar uno: sumá el `.svg` ahí y su id a `AVATARES` en `server.js` y en `public/js/panel.js`.

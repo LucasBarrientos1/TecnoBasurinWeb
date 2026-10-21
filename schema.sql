@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     email         TEXT NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,              -- nunca la contraseña en texto plano
     rol           TEXT NOT NULL DEFAULT 'usuario' CHECK (rol IN ('usuario','admin')),
+    avatar        TEXT NOT NULL DEFAULT 'hoja',   -- foto de perfil predeterminada (ver AVATARES en server.js)
     creado        TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 

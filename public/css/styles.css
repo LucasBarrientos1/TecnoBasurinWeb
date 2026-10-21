@@ -1257,9 +1257,9 @@ html {
     }
 }
 /* ---------- Administración ---------- */
-.admin-tabs { display: flex; gap: 10px; margin: 25px 0 10px; }
-.admin-tab { background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer; }
-.admin-tab.active { background: rgba(0,255,127,0.1); color: var(--accent-green); border-color: var(--accent-green); }
+.admin-tabs, .panel-tabs { display: flex; gap: 10px; margin: 25px 0 10px; }
+.admin-tab, .panel-tab { background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.admin-tab.active, .panel-tab.active { background: rgba(0,255,127,0.1); color: var(--accent-green); border-color: var(--accent-green); }
 .admin-select { background: var(--card-bg-dark); color: var(--text-bright); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 10px; font-size: 13px; }
 .admin-select:disabled { opacity: .5; cursor: not-allowed; }
 [hidden] { display: none !important; }
@@ -1300,3 +1300,24 @@ nav ul li a, .user-welcome { white-space: nowrap; }
 
 .proto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 880px; margin: 0 auto; }
 .proto-grid img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: rgba(6, 11, 15, 0.98); border-radius: 12px; border: 1px solid rgba(0, 255, 127, 0.18); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); }
+
+/* ---------- Avatares, perfil y comunidad ---------- */
+.user-avatar { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--accent-green); vertical-align: middle; margin-right: 8px; background: #0a0f12; }
+.avatar-actual { display: flex; align-items: center; gap: 16px; margin: 20px 0 10px; color: var(--text-bright); font-size: 18px; }
+.avatar-actual img { width: 84px; height: 84px; border-radius: 50%; border: 3px solid var(--accent-green); box-shadow: 0 0 20px rgba(0, 255, 127, 0.25); }
+.avatar-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 460px; margin-top: 20px; }
+.avatar-opt { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 12px 6px; background: rgba(17, 24, 32, 0.8); border: 2px solid var(--border-color); border-radius: 14px; color: var(--text-muted); font-size: 13px; cursor: pointer; transition: all 0.2s ease; }
+.avatar-opt img { width: 100%; max-width: 64px; aspect-ratio: 1; height: auto; border-radius: 50%; }
+.avatar-opt:hover { border-color: rgba(0, 255, 127, 0.5); transform: translateY(-2px); }
+.avatar-opt.activo { border-color: var(--accent-green); color: var(--accent-green); background: rgba(0, 255, 127, 0.08); }
+.com-miembro { display: inline-flex; align-items: center; gap: 10px; }
+.com-avatar { width: 30px; height: 30px; border-radius: 50%; vertical-align: middle; }
+.com-avatar.grande { width: 56px; height: 56px; }
+.rank-yo { background: rgba(0, 255, 127, 0.08); }
+.com-nuevos { display: flex; flex-wrap: wrap; gap: 16px; }
+.com-nuevo { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 16px; border-radius: 12px; color: var(--text-bright); font-size: 13px; }
+.header-action { display: flex; align-items: center; }
+#com-ranking td { vertical-align: middle; }
+/* En el celular se oculta el "Hola, nombre" (queda el avatar) para que el encabezado no crezca */
+@media screen and (max-width: 768px) { .user-welcome { display: none; } }
+.avatar-opt span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

@@ -76,13 +76,13 @@ app.post('/api/registro', wrap(async (req, res) => {
 app.post('/api/login', wrap(async (req, res) => {
     const email = str(req.body.email, 150).toLowerCase();
     const password = typeof req.body.password === 'string' ? req.body.password : '';
-    const { rows } = await pool.query('SELECT id, nombre, email, rol, password_hash FROM usuarios WHERE email = $1', [email]);
+    const { rows } = await pool.query('SELECT id, nombre, email, rol, avatar, password_hash FROM usuarios WHERE email = $1', [email]);
     const u = rows[0];
     if (!u || !(await bcrypt.compare(password, u.password_hash))) {
         return res.status(401).json({ error: 'Email o contraseña incorrectos.' });
     }
     const token = jwt.sign({ id: u.id, nombre: u.nombre }, JWT_SECRET, { expiresIn: '8h' });
-    res.json({ token, nombre: u.nombre, email: u.email, rol: u.rol });
+    res.json({ token, nombre: u.nombre, email: u.email, rol: u.rol, avatar: avatarOk(u.avatar) });
 }));
 
 // ---------- recuperar contraseña ----------
@@ -181,14 +181,55 @@ app.put('/api/panel', auth(true), wrap(async (req, res) => {
     res.json({ ok: true });
 }));
 
+// ---------- perfil (avatar predeterminado) y comunidad ----------
+// Los avatares son imágenes fijas en public/Imagen/avatares/<id>.svg: nadie sube archivos.
+const AVATARES = ['hoja', 'pila', 'chip', 'rayo', 'planeta', 'robot', 'contenedor', 'monitor'];
+const avatarOk = a => (AVATARES.includes(a) ? a : AVATARES[0]);
+// En la comunidad se muestra solo "Nombre I." (nunca el correo ni el apellido completo).
+const nombreCorto = n => { const p = String(n).trim().split(/\s+/); return p[0] + (p[1] ? ' ' + p[1][0].toUpperCase() + '.' : ''); };
+// El estado del panel lo guarda cada usuario desde el navegador: se valida antes de usarlo en el ranking.
+const numSeguro = (v, max) => { const n = Number(v); return Number.isFinite(n) && n > 0 ? Math.min(n, max) : 0; };
+
+app.put('/api/perfil/avatar', auth(true), wrap(async (req, res) => {
+    const avatar = req.body.avatar;
+    if (!AVATARES.includes(avatar)) return res.status(400).json({ error: 'Avatar inválido.' });
+    await pool.query('UPDATE usuarios SET avatar = $1 WHERE id = $2', [avatar, req.user.id]);
+    res.json({ ok: true, avatar });
+}));
+
+app.get('/api/comunidad', auth(true), wrap(async (req, res) => {
+    const { rows } = await pool.query(
+        `SELECT u.id, u.nombre, u.avatar, u.creado, p.estado->'total' AS total, p.estado->'kg' AS kg
+         FROM usuarios u LEFT JOIN panel_estado p ON p.usuario_id = u.id`);
+    const miembros = rows.map(r => ({
+        id: r.id, nombre: nombreCorto(r.nombre), avatar: avatarOk(r.avatar), creado: r.creado,
+        residuos: Math.floor(numSeguro(r.total, 1e6)), kg: Math.round(numSeguro(r.kg, 1e6) * 100) / 100
+    }));
+    const publico = ({ id, creado, ...m }) => ({ ...m, soyYo: id === req.user.id }); // nunca se envía el id de otras personas
+    const ranking = [...miembros].sort((a, b) => b.kg - a.kg || b.residuos - a.residuos || a.id - b.id)
+        .map((m, i) => ({ posicion: i + 1, ...m }));
+    const yo = ranking.find(m => m.id === req.user.id);
+    res.json({
+        miembros: miembros.length,
+        totales: {
+            residuos: miembros.reduce((t, m) => t + m.residuos, 0),
+            kg: Math.round(miembros.reduce((t, m) => t + m.kg, 0) * 100) / 100
+        },
+        ranking: ranking.slice(0, 10).map(publico),
+        miPosicion: yo ? yo.posicion : null,
+        nuevos: [...miembros].sort((a, b) => new Date(b.creado) - new Date(a.creado)).slice(0, 6)
+            .map(m => { const { posicion, residuos, kg, ...resto } = publico(m); return resto; })
+    });
+}));
+
 // ---------- administración (solo rol admin) ----------
 const ESTADOS_PEDIDO = ['reservado', 'confirmado', 'enviado', 'entregado', 'cancelado'];
 
 // Devuelve el rol actual desde la base (el frontend lo usa para decidir si muestra el menú).
 app.get('/api/me', auth(true), wrap(async (req, res) => {
-    const { rows } = await pool.query('SELECT nombre, email, rol FROM usuarios WHERE id = $1', [req.user.id]);
+    const { rows } = await pool.query('SELECT nombre, email, rol, avatar FROM usuarios WHERE id = $1', [req.user.id]);
     if (!rows[0]) return res.status(401).json({ error: 'Tu sesión expiró. Volvé a iniciar sesión.' });
-    res.json(rows[0]);
+    res.json({ ...rows[0], avatar: avatarOk(rows[0].avatar) });
 }));
 
 app.get('/api/admin/usuarios', requireAdmin, wrap(async (req, res) => {

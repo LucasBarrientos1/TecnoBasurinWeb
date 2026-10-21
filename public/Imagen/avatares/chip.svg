@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="chip">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient></defs>
+<circle cx="64" cy="64" r="64" fill="url(#g)"/>
+<g stroke="#fff" stroke-width="4" stroke-linecap="round">
+<path d="M32 52H42M32 64H42M32 76H42M86 52H96M86 64H96M86 76H96M52 32V42M64 32V42M76 32V42M52 86V96M64 86V96M76 86V96"/></g>
+<rect x="42" y="42" width="44" height="44" rx="7" fill="#fff"/>
+<rect x="53" y="53" width="22" height="22" rx="4" fill="#1d4ed8"/>
+</svg>

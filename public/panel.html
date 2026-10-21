@@ -18,6 +18,13 @@
             <span class="panel-chip" id="panel-status">Dispositivo en línea</span>
         </div>
 
+        <div class="panel-tabs">
+            <button class="panel-tab active" data-tab="contenedor">Mi contenedor</button>
+            <button class="panel-tab" data-tab="comunidad">Comunidad</button>
+            <button class="panel-tab" data-tab="perfil">Mi perfil</button>
+        </div>
+
+        <div id="tab-contenedor">
         <div class="panel-stats" id="panel-stats"></div>
 
         <h2 class="panel-h2">Compartimientos</h2>
@@ -43,6 +50,26 @@
             <label><input type="checkbox" id="chk-auto"> Simulación automática</label>
             <button class="btn panel-btn-ghost" id="btn-reset">Reiniciar datos</button>
         </div>
+        </div><!-- /tab-contenedor -->
+
+        <section id="tab-comunidad" hidden>
+            <div class="panel-stats" id="com-stats"></div>
+            <h2 class="panel-h2">Ranking de la comunidad</h2>
+            <div class="panel-table-wrap"><table class="panel-table">
+                <thead><tr><th>#</th><th>Miembro</th><th>Residuos</th><th>Peso</th></tr></thead>
+                <tbody id="com-ranking"></tbody>
+            </table></div>
+            <p class="panel-empty" id="com-posicion" style="margin-top:12px;"></p>
+            <h2 class="panel-h2">Nuevos miembros</h2>
+            <div class="com-nuevos" id="com-nuevos"></div>
+        </section>
+
+        <section id="tab-perfil" hidden>
+            <h2 class="panel-h2">Tu foto de perfil</h2>
+            <p class="panel-empty">Elegí una imagen. Se muestra en el menú y en la comunidad.</p>
+            <div class="avatar-actual"><img id="avatar-actual" src="Imagen/avatares/hoja.svg" alt="Tu avatar actual"><strong id="avatar-nombre"></strong></div>
+            <div class="avatar-grid" id="avatar-grid"></div>
+        </section>
     </div>
 </main>
 <footer class="main-footer" id="site-footer"></footer>

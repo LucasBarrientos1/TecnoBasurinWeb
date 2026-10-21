@@ -10,7 +10,7 @@
         ['contacto.html', 'Contactos']
     ];
     if (logueado) links.push(['panel.html', 'Mi Panel']);
-    // Solo cosmético: la Seguridad real está en el servidor (requireAdmin). Un usuario común no pasa de admin.html.
+    // Solo cosmético: la seguridad real está en el servidor (requireAdmin). Un usuario común no pasa de admin.html.
     if (logueado && sessionStorage.getItem('rolUsuario') === 'admin') links.push(['admin.html', 'Administración']);
     const nav = links.map(([h, t]) => `<li><a href="${h}"${h === pagina ? ' class="active"' : ''}>${t}</a></li>`).join('');
 
@@ -38,7 +38,13 @@
             salir.style.marginLeft = '10px';
             salir.textContent = 'Cerrar sesión';
             salir.addEventListener('click', () => { sessionStorage.clear(); location.href = 'index.html'; });
-            auth.append(saludo, salir);
+            const avId = sessionStorage.getItem('avatarUsuario') || '';
+            const avatar = document.createElement('img');
+            avatar.className = 'user-avatar';
+            avatar.alt = '';
+            avatar.src = 'Imagen/avatares/' + (/^[a-z]+$/.test(avId) ? avId : 'hoja') + '.svg';
+            avatar.onerror = () => { avatar.onerror = null; avatar.src = 'Imagen/avatares/hoja.svg'; };
+            auth.append(avatar, saludo, salir);
         } else {
             auth.innerHTML = '<a href="login.html" class="btn btn-nav-login">Iniciar sesión</a>';
         }
