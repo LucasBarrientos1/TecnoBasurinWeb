@@ -1,3 +1,4 @@
+// Carrusel estilo Instagram: avanza solo, se desliza con el dedo, tiene flechas y puntitos.
 document.querySelectorAll('.ig-carousel').forEach(c => {
     const track = c.querySelector('.ig-track');
     const slides = [...track.children];

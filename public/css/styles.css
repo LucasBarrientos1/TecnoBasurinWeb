@@ -185,7 +185,7 @@ nav ul li a:hover, nav ul li a.active {
 }
 
 /* ==========================================
-   GRILLA SIMÉTRICA EXACTA PARA NUESTRO SISTEMA
+   GRILLA SIMÉTRICA EXACTA PARA "NUESTRO SISTEMA"
    ========================================== */
 .grid-3-cols {
     display: grid;
@@ -1288,7 +1288,7 @@ nav ul li a, .user-welcome { white-space: nowrap; }
 .ig-carousel { position: relative; border-radius: 14px; overflow: hidden; margin-bottom: 20px; border: 1px solid rgba(0, 255, 127, 0.18); background: #000; }
 .ig-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .ig-track::-webkit-scrollbar { display: none; }
-.ig-track img { flex: 0 0 100%; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 30%; scroll-snap-align: center; display: block; }
+.ig-track img { flex: 0 0 100%; width: 100%; aspect-ratio: 1 / 1; object-fit: contain; background: rgba(6, 11, 15, 0.98); scroll-snap-align: center; display: block; }
 .ig-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border-radius: 50%; border: none; background: rgba(0, 0, 0, 0.55); color: #fff; cursor: pointer; opacity: 0; transition: opacity 0.2s ease; }
 .ig-carousel:hover .ig-btn, .ig-btn:focus-visible { opacity: 1; }
 .ig-prev { left: 8px; }
@@ -1298,5 +1298,5 @@ nav ul li a, .user-welcome { white-space: nowrap; }
 .ig-dot.active { background: var(--accent-green); transform: scale(1.3); }
 @media (hover: none) { .ig-btn { display: none; } }
 
-.proto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; align-items: start; }
-.proto-grid img { width: 100%; height: auto; border-radius: 12px; border: 1px solid rgba(0, 255, 127, 0.18); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); }
+.proto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 880px; margin: 0 auto; }
+.proto-grid img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: rgba(6, 11, 15, 0.98); border-radius: 12px; border: 1px solid rgba(0, 255, 127, 0.18); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); }
